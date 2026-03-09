@@ -1,0 +1,15 @@
+http:
+  routers:
+    pi-hole-https:
+      entryPoints:
+        - "websecure"
+      rule: Host(`pi-hole.welovelsu.com`)
+      tls:
+        certResolver: cloudflare
+      service: "pi-hole"
+
+  services:
+    pi-hole:
+      loadBalancer:
+        servers:
+          - url: "http://192.168.68.5/"
