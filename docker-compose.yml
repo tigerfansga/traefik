@@ -1,4 +1,10 @@
 # docker-compose.yml
+---
+networks:
+  frontend:
+    external: true
+  backend:
+    external: true
 services:
   traefik:
     image: traefik:v3.6
@@ -11,3 +17,7 @@ services:
       - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - frontend
+      - backend
+    restart: unless-stopped
