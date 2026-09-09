@@ -1,0 +1,15 @@
+http:
+  routers:
+    proxmox-https:
+      entryPoints:
+        - "websecure"
+      rule: Host(`pve.welovelsu.com`)
+      tls:
+        certResolver: cloudflare
+      service: "proxmox"
+
+  services:
+    proxmox:
+      loadBalancer:
+        servers:
+          - url: "https://pve1.welovelsu.com:8006/"
